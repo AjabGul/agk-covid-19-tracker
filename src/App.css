@@ -27,6 +27,25 @@ body {
   flex: 0.9;
 }
 
+.table {
+  margin-top: 20px;
+  overflow: scroll;
+  height: 400px;
+}
+
+.table tr:nth-of-type(odd) {
+  background-color: rgb(219, 219, 219);
+}
+
+.table tr {
+  display: flex;
+  justify-content: space-between;
+}
+
+.table td {
+  padding: 4px;
+}
+
 @media (max-width: 900px) {
   .app {
     flex-direction: column;
