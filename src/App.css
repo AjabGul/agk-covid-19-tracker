@@ -1,11 +1,6 @@
 * {
   margin: 0;
 }
-/* .app_header {
-  display: flex;
-  justify-items: "space-between";
-  align-items: center;
-} */
 
 body {
   background-color: rgb(245, 245, 245);
@@ -22,15 +17,26 @@ body {
   padding: 20px;
 }
 
+.dropDown {
+  border: solid 2px white;
+  border-radius: 5px;
+  padding: 0 8px;
+}
+
 .app_left {
   /* app_left div will tak 90% of the width of the screen */
   flex: 0.9;
 }
 
+.graph {
+  height: 255px;
+}
+
 .table {
   margin-top: 20px;
+  margin-bottom: 10px;
   overflow: scroll;
-  height: 400px;
+  height: 390px;
 }
 
 .table tr:nth-of-type(odd) {

@@ -39,7 +39,7 @@ const options = {
         },
         ticks: {
           callback: function (value, index, values) {
-            return numeral(value).format('0a');
+            return numeral(value).format("0a");
           },
         },
       },
@@ -74,14 +74,14 @@ function LineGraph({ casesType='cases' }) {
       // console.log(data)
       let chartData = buildChartData(data, casesType);
       setData(chartData);
-        // console.log(chartData)
+      console.log("chartdata", chartData)
     };
 
     fetchGraphData();
   }, [casesType]);
 
   return (
-    <div>
+    <div className="graph">
       {/* data?.length > 0 && ==> data && data.length > 0 &&  */}
       {data?.length > 0 && (
         <Line
