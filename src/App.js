@@ -3,7 +3,8 @@ import './App.css';
 import { makeStyles } from '@material-ui/core/styles';
 // Import Components 
 import InfoBox from './components/InfoBox';
-import Map from './components/Map';
+import MapContainer from './components/MapContainer'
+import "leaflet/dist/leaflet.css";
 import Table from './components/Table';
 import { sortData } from './components/util';
 import LineGraph from './components/LineGraph';
@@ -40,7 +41,10 @@ function App() {
     const [country, setCountry] = useState('worldwide');
     const [countryInfo, setCountryInfo] = useState({});
     const [ tableData, setTableData] = useState([]);
-
+    const [mapCenter, setMapCenter] = useState({lat: 37.090240, lng: -95.712891})
+    const [mapZoom, setMapZoom] = useState(3); 
+    const [mapCountries, setMapCountries] = useState([]);
+   
     useEffect(()=>{
       fetch("https://disease.sh/v3/covid-19/all")
       .then(response => response.json())
@@ -66,6 +70,7 @@ function App() {
 
         setTableData(sortedData);
         setCountries(countries);
+        setMapCountries(data);
       };
 
       getCountriesData();
@@ -80,6 +85,12 @@ function App() {
         await fetch(url).then((response)=> response.json()).then((data) => {
           setCountry(countryCode);
           setCountryInfo(data);
+        
+          // on change country the map should move to that country
+          setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
+          setMapZoom(4);
+          console.log({lat : data.countryInfo.lat, lng : data.countryInfo.long})
+          console.log(mapCenter)
         })
     };
 
@@ -118,12 +129,15 @@ function App() {
 
                 <InfoBox title='Deaths' cases={ countryInfo.todayDeaths} total = {countryInfo.deaths}/>
             </div>
-            <Map />
+            <MapContainer 
+              countries={mapCountries}
+              center={mapCenter} 
+              zoom={mapZoom}
+            />
           </div>
         </div>
         <Card className="app_right">
           <CardContent>
-            
             <h3>Live cases by country</h3>
             <Table countries = {tableData}></Table>
             <h3>Worldwide New Cases</h3>

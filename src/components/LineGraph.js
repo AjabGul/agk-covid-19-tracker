@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Line } from "react-chartjs-2";
-import numeral from "numeral";
+import {numeral} from "numeral";
+
 
 const options = {
   legend: {
@@ -8,7 +9,7 @@ const options = {
   },
   elements: {
     point: {
-      radius: 0,
+      radius: 1,
     },
   },
   maintainAspectRatio: false,
@@ -26,7 +27,7 @@ const options = {
       {
         type: "time",
         time: {
-          format: "MM/DD/YY",
+          format: "DD/MM/YY",
           tooltipFormat: "ll",
         },
       },
@@ -38,7 +39,7 @@ const options = {
         },
         ticks: {
           callback: function (value, index, values) {
-            return numeral(value).format("0a");
+            return numeral(value).format('0a');
           },
         },
       },
@@ -70,9 +71,10 @@ function LineGraph({ casesType='cases' }) {
     const fetchGraphData = async () => {
       const response = await fetch("https://disease.sh/v3/covid-19/historical/all?lastdays=120");
       const data = await response.json();
-        let chartData = buildChartData(data, casesType);
-        setData(chartData);
-        console.log(chartData)
+      // console.log(data)
+      let chartData = buildChartData(data, casesType);
+      setData(chartData);
+        // console.log(chartData)
     };
 
     fetchGraphData();
@@ -83,16 +85,20 @@ function LineGraph({ casesType='cases' }) {
       {/* data?.length > 0 && ==> data && data.length > 0 &&  */}
       {data?.length > 0 && (
         <Line
-          options={options}
           data={{
             datasets: [
               {
-                backgrondColor: "gray",
-                borderColor: "#CC1034",
                 data: data,
+                label: "Cases World Wide",
+                fill: true,
+                backgroundColor: 'pink',
+                borderColor: 'orange',
+                borderWidth: 2,
               },
             ],
           }}
+
+          options={options}
         />
       )}
     </div>

@@ -1,0 +1,12 @@
+.mapContainer {
+  height: 500px;
+  background-color: white;
+  padding: 1rem;
+  border-radius: 20px;
+  margin: 16px 0 16px 0;
+  box-shadow: 0 0 8px -4px;
+}
+
+.mapContainer .leaflet-container {
+  height: 100%;
+}
