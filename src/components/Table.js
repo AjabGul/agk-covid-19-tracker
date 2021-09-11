@@ -1,7 +1,7 @@
 import React from 'react'
 import numeral from 'numeral';
 
-function Table({countries}) {
+const Table = ({countries}) => {
     return (
         <div className="table">
             {countries.map(country => (
@@ -16,4 +16,4 @@ function Table({countries}) {
     )
 }
 
-export default Table
+export default Table;

@@ -90,7 +90,9 @@ function App() {
           setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
           setMapZoom(4);
           console.log({lat : data.countryInfo.lat, lng : data.countryInfo.long})
-          console.log(mapCenter)
+          console.log("map center",mapCenter)
+          console.log(countryCode)
+          console.log(data)
         })
     };
 
